@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useContext, useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,11 +9,14 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import ContextA from '../Asset/Context';
 
 
 
 
 function Login() {
+
+  const driver = useContext(ContextA)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,6 +27,10 @@ function Login() {
       password: data.get('password'),
     });
   };
+
+  useEffect(() => {    
+    driver.setIsAuth(false);
+    });
 
   return (
     <Container component="main" maxWidth="xs">

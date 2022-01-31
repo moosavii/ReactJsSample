@@ -4,9 +4,8 @@ const CustomTheme = createTheme({
   typography: {
     //fontSize: 14,
     fontFamily: [
-      'b nazanin',
-      'Arial'
-    ].join(','),
+      'tahoma'
+    ].join(',')
   },
 });
 
