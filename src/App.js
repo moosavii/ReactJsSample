@@ -6,10 +6,10 @@ import { ThemeProvider } from '@mui/material';
 import CustomTheme from './Asset/CustomTheme';
 import ContextA from './Asset/Context';
 import cacheRtl from './Asset/CustomCache';
-import Header from './component/Header';
-import NotFound from './component/NotFound';
-import Home from './component/Home';
-import Login from './component/Login';
+import Header from './Components/Header';
+import NotFound from './Pages/NotFound';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
 
 import './App.css';
 
@@ -22,7 +22,7 @@ import './App.css';
 
 
 function App() {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
   const driver = {isAuth , setIsAuth}
 

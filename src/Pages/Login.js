@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ContextA from '../Asset/Context';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -17,20 +18,27 @@ import ContextA from '../Asset/Context';
 function Login() {
 
   const driver = useContext(ContextA)
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
+    console.log(123);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
+      email: data.get('username'),
       password: data.get('password'),
     });
+
+    if (data.get('username') == 'ali' && data.get('password') == '123')
+    {
+      driver.setIsAuth(true)
+      navigate("/home")
+    }
   };
 
-  useEffect(() => {    
+  useEffect(() => {
     driver.setIsAuth(false);
-    });
+  },[]);
 
   return (
     <Container component="main" maxWidth="xs">

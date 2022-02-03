@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import Ticket from "../Components/Ticket"
 
 function Home()
 {
@@ -6,7 +7,7 @@ function Home()
         <div>
             home
 
-            <Button variant="contained">Contained</Button>
+            <Ticket/>
         </div>
     );
 }
