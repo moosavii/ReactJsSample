@@ -1,53 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CacheProvider } from '@emotion/react';
-import { ThemeProvider } from '@mui/material';
+import { Box, ThemeProvider } from '@mui/material';
 
 import CustomTheme from './Asset/CustomTheme';
 import ContextA from './Asset/Context';
 import cacheRtl from './Asset/CustomCache';
-import Header from './Components/Header';
-import NotFound from './Pages/NotFound';
-import Home from './Pages/Home';
-import Login from './Pages/Login';
-
-import './App.css';
-
-
-
-
-
-
-
+import AppIn from './AppIn';
+import AppOut from './AppOut';
 
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
-  const driver = {isAuth , setIsAuth}
+
+  /// init
+    console.log("init")
+    let LocalIsAuth = localStorage.getItem("isAuth");
+    if (LocalIsAuth == "true" && isAuth == false)
+      setIsAuth(true);
+    else if (LocalIsAuth == "false" && isAuth == true)
+      setIsAuth(false);
+  ///
+
+  const setIsAuthAndLocalStorege = (value) => {
+    setIsAuth(value);
+    localStorage.setItem("isAuth", value);
+  }
+
+  const driver = {
+    isAuth,
+    setIsAuthAndLocalStorege,
+    sideBarOpen,
+    setSideBarOpen
+  }
 
   return (
-    <div dir="rtl">
-      <center>
-        only god helps
-      </center>
+    <Box dir="rtl" >
+
       <CacheProvider value={cacheRtl}>
         <ThemeProvider theme={CustomTheme}>
           <ContextA.Provider value={driver}>
-            {isAuth && <Header />}
-
-            <BrowserRouter>
-              <Routes>
-                <Route exact path="/" element={isAuth ? <Home /> : <Navigate to="/login" />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/home" element={isAuth ? <Home /> : <Navigate to="/login" />} />
-                <Route path="*" element={isAuth ? <NotFound /> : <Navigate to="/login" />} />
-              </Routes>
-            </BrowserRouter>
+            <Box>
+              {isAuth ? <AppIn /> : <AppOut />}
+            </Box>
           </ContextA.Provider>
         </ThemeProvider>
       </CacheProvider>
-    </div>
+    </Box>
   );
 }
 

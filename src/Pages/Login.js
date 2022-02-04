@@ -21,7 +21,6 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    console.log(123);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -31,13 +30,14 @@ function Login() {
 
     if (data.get('username') == 'ali' && data.get('password') == '123')
     {
-      driver.setIsAuth(true)
+      driver.setIsAuthAndLocalStorege(true)
       navigate("/home")
     }
   };
 
   useEffect(() => {
-    driver.setIsAuth(false);
+    console.log("login component is loaded")
+    driver.setIsAuthAndLocalStorege(false);
   },[]);
 
   return (
