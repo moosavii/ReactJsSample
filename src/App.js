@@ -3,16 +3,16 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CacheProvider } from '@emotion/react';
 import { Box, ThemeProvider } from '@mui/material';
 
-import CustomTheme from './Asset/CustomTheme';
-import ContextA from './Asset/Context';
-import cacheRtl from './Asset/CustomCache';
+import CustomTheme from './Util/CustomTheme';
+import ContextA from './Util/Context';
+import cacheRtl from './Util/CustomCache';
 import AppIn from './AppIn';
 import AppOut from './AppOut';
 
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
-  const [sideBarOpen, setSideBarOpen] = useState(false);
+  //const [sideBarOpen, setSideBarOpen] = useState(false);
 
 
   /// init
@@ -32,8 +32,6 @@ function App() {
   const driver = {
     isAuth,
     setIsAuthAndLocalStorege,
-    sideBarOpen,
-    setSideBarOpen
   }
 
   return (

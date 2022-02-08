@@ -11,7 +11,8 @@ import StickyNote2Outlined from '@mui/icons-material/StickyNote2Outlined';
 import Drafts from '@mui/icons-material/Drafts';
 import Telegram from '@mui/icons-material/Telegram';
 
-import ContextA from '../Asset/Context';
+import ContextA from '../Util/Context';
+import { AppBar, Drawer } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -20,8 +21,103 @@ export default function SideBar() {
     const driver = React.useContext(ContextA);
 
     return (
-        <Box sx={{ border: 1, borderColor: 'gray', height: '100%' }} >
+        <Drawer open={driver.sideBarOpen} variant="persistent" >
+              
             <List >
+                <ListItem button key={"new"}>
+                    <ListItemIcon sx={{flexGrow:"0"}}>
+                        <AddBoxOutlined sx={{flexGrow:"0"}} />
+                    </ListItemIcon>
+                    <ListItemText primary={"جدید"} sx={{flexGrow:"100"}}/>
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"private"}>
+                    <ListItemIcon>
+                        <StickyNote2Outlined />
+                    </ListItemIcon>
+                    <ListItemText primary={"شخصی"} />
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"inbox"}>
+                    <ListItemIcon>
+                        <Drafts />
+                    </ListItemIcon>
+                    <ListItemText primary={"دریافتی"} />
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"sent"}>
+                    <ListItemIcon>
+                        <Telegram />
+                    </ListItemIcon>
+                    <ListItemText primary={"ارسالی"} />
+                </ListItem>
+
+
+                <ListItem button key={"new"}>
+                    <ListItemIcon sx={{flexGrow:"0"}}>
+                        <AddBoxOutlined sx={{flexGrow:"0"}} />
+                    </ListItemIcon>
+                    <ListItemText primary={"جدید"} sx={{flexGrow:"100"}}/>
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"private"}>
+                    <ListItemIcon>
+                        <StickyNote2Outlined />
+                    </ListItemIcon>
+                    <ListItemText primary={"شخصی"} />
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"inbox"}>
+                    <ListItemIcon>
+                        <Drafts />
+                    </ListItemIcon>
+                    <ListItemText primary={"دریافتی"} />
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"sent"}>
+                    <ListItemIcon>
+                        <Telegram />
+                    </ListItemIcon>
+                    <ListItemText primary={"ارسالی"} />
+                </ListItem>
+
+                <ListItem button key={"new"}>
+                    <ListItemIcon sx={{flexGrow:"0"}}>
+                        <AddBoxOutlined sx={{flexGrow:"0"}} />
+                    </ListItemIcon>
+                    <ListItemText primary={"جدید"} sx={{flexGrow:"100"}}/>
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"private"}>
+                    <ListItemIcon>
+                        <StickyNote2Outlined />
+                    </ListItemIcon>
+                    <ListItemText primary={"شخصی"} />
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"inbox"}>
+                    <ListItemIcon>
+                        <Drafts />
+                    </ListItemIcon>
+                    <ListItemText primary={"دریافتی"} />
+                </ListItem>
+                <Divider />
+
+                <ListItem button key={"sent"}>
+                    <ListItemIcon>
+                        <Telegram />
+                    </ListItemIcon>
+                    <ListItemText primary={"ارسالی"} />
+                </ListItem>
+
                 <ListItem button key={"new"}>
                     <ListItemIcon sx={{flexGrow:"0"}}>
                         <AddBoxOutlined sx={{flexGrow:"0"}} />
@@ -54,7 +150,7 @@ export default function SideBar() {
                 </ListItem>
             </List>
 
-        </Box>
+        </Drawer>
 
     );
 }

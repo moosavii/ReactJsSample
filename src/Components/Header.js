@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import ContextA from '../Asset/Context';
+import ContextA from '../Util/Context';
 
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -36,7 +36,7 @@ function Header() {
 
   return (
 
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <IconButton onClick={openCloseSideBar}
           size="large"
