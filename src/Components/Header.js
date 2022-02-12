@@ -1,93 +1,51 @@
-import * as React from 'react';
+import MuiAppBar from '@mui/material/AppBar';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import ContextA from '../Util/Context';
+import { MoreVert, ExitToApp, PersonOutline } from '@mui/icons-material';
 
-function Header() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const driver = React.useContext(ContextA);
+export default function Header({ sideBarOpen, toggleDrawer, handleLogout }) {
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    return (
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+        <AppBar position="absolute"  >
+            <Toolbar >{/* نمایش افقی المان های داخلی */}
+                <IconButton
+                    edge="start"
+                    color="inherit"
 
-  const handleLogout = () => {
-    driver.setIsAuthAndLocalStorege(false);
-  };
+                    aria-label="open drawer"
+                    onClick={toggleDrawer}
+                    sx={{
+                        marginRight: '36px',
+                        background: sideBarOpen ? "#1d7ddd" : "#aaaaee"
+                    }}
+                >
+                    {sideBarOpen ? <MenuIcon /> : <MoreVert />}
+                </IconButton>
+                <Typography
+                    component="h1"
+                    variant="h6"
+                    color="inherit"
+                    noWrap
+                    sx={{ flexGrow: 1 }}
+                >
+                    فقط خدا
+                </Typography>
 
-  const openCloseSideBar = () => {
-    driver.setSideBarOpen(!driver.sideBarOpen);
-  };
+                <IconButton color="inherit" sx={{ background: "#1d7ddd" }}>
+                    <PersonOutline />
+                </IconButton>
 
-  return (
+                <IconButton color="inherit" sx={{ background: "#1d7ddd" }} onClick={handleLogout} >
+                    <ExitToApp />
+                </IconButton>
 
-    <AppBar position="sticky">
-      <Toolbar>
-        <IconButton onClick={openCloseSideBar}
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          فقط خدا
-        </Typography>
-
-        <div>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>
-              مشخصات کاربری
-            </MenuItem>
-            <MenuItem onClick={handleLogout}>
-              خروج
-            </MenuItem>
-          </Menu>
-        </div>
-
-      </Toolbar>
-    </AppBar>
-  );
+            </Toolbar>
+        </ AppBar>
+    );
 }
-export default Header;
+

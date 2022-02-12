@@ -1,5 +1,7 @@
 import { Button } from "@mui/material";
 import Ticket from "../Components/Ticket"
+import SimpleDialogDemo from "../Components/SimpleDialog"
+
 import { Box, ThemeProvider } from '@mui/material';
 import { useEffect, useState } from "react";
 
@@ -36,6 +38,7 @@ function Home() {
             {
                 ticket.map((item, index) => <Ticket key={index} owner={item.owner} dateCreated={item.dateCreated} imgpath={item.imagePath} note={item.note} />)
             }
+          {/* <SimpleDialogDemo  open = {true} /> */}
 
         </Box>
     );

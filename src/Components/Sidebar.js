@@ -1,156 +1,50 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import AddBoxOutlined from '@mui/icons-material/AddBoxOutlined';
+import { mainListItems, secondaryListItems } from './ListItems';
 
-import StickyNote2Outlined from '@mui/icons-material/StickyNote2Outlined';
-import Drafts from '@mui/icons-material/Drafts';
-import Telegram from '@mui/icons-material/Telegram';
-
-import ContextA from '../Util/Context';
-import { AppBar, Drawer } from '@mui/material';
 
 const drawerWidth = 240;
 
-export default function SideBar() {
 
-    const driver = React.useContext(ContextA);
-
-    return (
-        <Drawer open={driver.sideBarOpen} variant="persistent" >
-              
-            <List >
-                <ListItem button key={"new"}>
-                    <ListItemIcon sx={{flexGrow:"0"}}>
-                        <AddBoxOutlined sx={{flexGrow:"0"}} />
-                    </ListItemIcon>
-                    <ListItemText primary={"جدید"} sx={{flexGrow:"100"}}/>
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"private"}>
-                    <ListItemIcon>
-                        <StickyNote2Outlined />
-                    </ListItemIcon>
-                    <ListItemText primary={"شخصی"} />
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"inbox"}>
-                    <ListItemIcon>
-                        <Drafts />
-                    </ListItemIcon>
-                    <ListItemText primary={"دریافتی"} />
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"sent"}>
-                    <ListItemIcon>
-                        <Telegram />
-                    </ListItemIcon>
-                    <ListItemText primary={"ارسالی"} />
-                </ListItem>
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    '& .MuiDrawer-paper': {
+      position: 'relative',
+      whiteSpace: 'nowrap',
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      boxSizing: 'border-box',
+      ...(!open && {
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing(0),/*  در حالت موبایل */
+        [theme.breakpoints.up('sm')]: {
+          width: theme.spacing(0),
+        },
+      }),
+    },
+  }),
+);
 
 
-                <ListItem button key={"new"}>
-                    <ListItemIcon sx={{flexGrow:"0"}}>
-                        <AddBoxOutlined sx={{flexGrow:"0"}} />
-                    </ListItemIcon>
-                    <ListItemText primary={"جدید"} sx={{flexGrow:"100"}}/>
-                </ListItem>
-                <Divider />
+export default function SideBar({ sideBarOpen }) {
 
-                <ListItem button key={"private"}>
-                    <ListItemIcon>
-                        <StickyNote2Outlined />
-                    </ListItemIcon>
-                    <ListItemText primary={"شخصی"} />
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"inbox"}>
-                    <ListItemIcon>
-                        <Drafts />
-                    </ListItemIcon>
-                    <ListItemText primary={"دریافتی"} />
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"sent"}>
-                    <ListItemIcon>
-                        <Telegram />
-                    </ListItemIcon>
-                    <ListItemText primary={"ارسالی"} />
-                </ListItem>
-
-                <ListItem button key={"new"}>
-                    <ListItemIcon sx={{flexGrow:"0"}}>
-                        <AddBoxOutlined sx={{flexGrow:"0"}} />
-                    </ListItemIcon>
-                    <ListItemText primary={"جدید"} sx={{flexGrow:"100"}}/>
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"private"}>
-                    <ListItemIcon>
-                        <StickyNote2Outlined />
-                    </ListItemIcon>
-                    <ListItemText primary={"شخصی"} />
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"inbox"}>
-                    <ListItemIcon>
-                        <Drafts />
-                    </ListItemIcon>
-                    <ListItemText primary={"دریافتی"} />
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"sent"}>
-                    <ListItemIcon>
-                        <Telegram />
-                    </ListItemIcon>
-                    <ListItemText primary={"ارسالی"} />
-                </ListItem>
-
-                <ListItem button key={"new"}>
-                    <ListItemIcon sx={{flexGrow:"0"}}>
-                        <AddBoxOutlined sx={{flexGrow:"0"}} />
-                    </ListItemIcon>
-                    <ListItemText primary={"جدید"} sx={{flexGrow:"100"}}/>
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"private"}>
-                    <ListItemIcon>
-                        <StickyNote2Outlined />
-                    </ListItemIcon>
-                    <ListItemText primary={"شخصی"} />
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"inbox"}>
-                    <ListItemIcon>
-                        <Drafts />
-                    </ListItemIcon>
-                    <ListItemText primary={"دریافتی"} />
-                </ListItem>
-                <Divider />
-
-                <ListItem button key={"sent"}>
-                    <ListItemIcon>
-                        <Telegram />
-                    </ListItemIcon>
-                    <ListItemText primary={"ارسالی"} />
-                </ListItem>
-            </List>
-
-        </Drawer>
-
-    );
+  return (
+    <Drawer variant="permanent" open={sideBarOpen} sx={{ height: 'calc(100vh - 65px)', overflow: 'auto', marginTop: '65px' }}>
+      <Divider />
+      <List component="nav">
+        {mainListItems}
+      </List>
+    </Drawer>
+  );
 }
+

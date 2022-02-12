@@ -13,10 +13,12 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SimpleDialogDemo from './SimpleDialog'
+import { Box } from '@mui/material';
 
 
 
-export default function RecipeReviewCard({owner, dateCreated ,  imgpath , note  }) {
+export default function Ticket({owner, dateCreated ,  imgpath , note  }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -78,6 +80,8 @@ export default function RecipeReviewCard({owner, dateCreated ,  imgpath , note  
           </Typography>
         </CardContent>
       </Collapse>
+
     </Card>
+
   );
 }
