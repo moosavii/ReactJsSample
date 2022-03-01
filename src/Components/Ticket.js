@@ -14,11 +14,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SimpleDialogDemo from './SimpleDialog'
-import { Box } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 
 
 
-export default function Ticket({owner, dateCreated ,  imgpath , note  }) {
+export default function Ticket({ owner, dateCreated, imgpath, note, action }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -26,7 +26,7 @@ export default function Ticket({owner, dateCreated ,  imgpath , note  }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 290 ,minWidth : 290 , margin :1}}>
+    <Card sx={{ maxWidth: 290, minWidth: 290, margin: 1 , display :"flex"  ,flexDirection: 'column',}}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -38,7 +38,7 @@ export default function Ticket({owner, dateCreated ,  imgpath , note  }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={owner} 
+        title={owner}
         subheader={dateCreated}
       />
       {imgpath &&   // image path
@@ -48,13 +48,24 @@ export default function Ticket({owner, dateCreated ,  imgpath , note  }) {
           image={imgpath}
           alt={imgpath}
         />}
-      <CardContent >
-        <Typography variant="body2" color="text.secondary">
-          {note}
-        </Typography>
+      <CardContent sx ={{flexGrow :"100"}}>
+        {action == "new" ?
+          <TextField
+            // id="outlined-multiline-static"
+            disabled
+            label="یادداشت"
+            multiline
+            rows={10}
+            value={note}
+          // defaultValue="Default Value"
+          />
+          :
+          <Typography variant="body2" color="text.secondary">
+            {note}
+          </Typography>}
       </CardContent>
-      
-      <CardActions  sx ={{float : "button"}}>
+
+      <CardActions >
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
@@ -63,7 +74,7 @@ export default function Ticket({owner, dateCreated ,  imgpath , note  }) {
         </IconButton>
 
       </CardActions>
-      
+
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Method:</Typography>
