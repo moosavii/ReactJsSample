@@ -4,6 +4,7 @@ import SimpleDialogDemo from "../Components/SimpleDialog"
 
 import { Box, ThemeProvider } from '@mui/material';
 import { useEffect, useState } from "react";
+import Ajory from "../Components/Ajory";
 
 //import  './Home.css';
 
@@ -38,15 +39,19 @@ function Home() {
   }, [])
 
   return (
-    <Box sx={{ 
-          display :"flex", 
-          flexDirection :"row" ,  
-          flexWrap: "wrap", 
-          justifyContent :"flex-start" }}>
+    <Box sx={{
+      // display: "flex",
+      // flexDirection: "row",
+      // flexWrap: "wrap",
+      // justifyContent: "flex-start",
+      backgroundColor : "red"
+      
+    }}>
+      <Ajory colWidth={300} colGap={10}  >
         {
           ticket.map((item, index) => <Ticket key={index} owner={item.owner} dateCreated={item.dateCreated} imgpath={item.imagePath} note={item.note} />)
         }
-
+      </Ajory>
     </Box>
   );
 }

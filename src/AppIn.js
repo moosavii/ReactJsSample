@@ -45,7 +45,9 @@ export default function AppIn() {
           // height: '100vh',
           overflow: 'auto',
           marginTop : "65px",
-          height: 'calc(100vh - 65px)'
+          height: 'calc(100vh - 65px)',
+          width: '100%',
+
         }}
       >
         {/* <Container  sx={{maxWidth : "100% !important" , marginTop : "50px" }}> */}
