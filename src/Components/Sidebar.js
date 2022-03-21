@@ -20,7 +20,7 @@ import AddBoxOutlined from '@mui/icons-material/AddBoxOutlined';
 import StickyNote2Outlined from '@mui/icons-material/StickyNote2Outlined';
 import Drafts from '@mui/icons-material/Drafts';
 import Telegram from '@mui/icons-material/Telegram';
-import { AccessibilityNew, Person } from '@mui/icons-material';
+import { AccessibilityNew, NearMeOutlined, Person } from '@mui/icons-material';
 import SimpleDialog from './SimpleDialog';
 import { Dialog, DialogTitle } from '@mui/material';
 import Ticket from './Ticket';
@@ -95,7 +95,7 @@ export default function SideBar({ sideBarOpen }) {
   
       <ListItem button key={"sent"}>
         <ListItemIcon>
-          <Telegram />
+          <NearMeOutlined />
         </ListItemIcon>
         <ListItemText primary={"ارسالی"} />
       </ListItem>
@@ -170,12 +170,10 @@ export default function SideBar({ sideBarOpen }) {
           {mainListItems}
         </List>
       </Drawer>
-
+      
+      {/* ========dialog opne on state change======== */}
       <Dialog onClose={closeDialog} open={showDialog == "newTicket"}>
-        <DialogTitle>
-          ثبت تیکت جدید
-        </DialogTitle>
-        <Ticket />
+        <Ticket action = "new"/>
       </Dialog>
     </>
   );

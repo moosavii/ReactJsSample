@@ -15,6 +15,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SimpleDialogDemo from './SimpleDialog'
 import { Box, TextField } from '@mui/material';
+import { AddComment, AddCommentOutlined, AttachEmail, AttachFile, DownloadDone, NearMeOutlined, PendingActions, RocketLaunchOutlined, Save, SaveAlt, SaveAltOutlined, SaveAs, SendOutlined, Telegram } from '@mui/icons-material';
 
 
 
@@ -26,7 +27,7 @@ export default function Ticket({ owner, dateCreated, imgpath, note, action }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 290, minWidth: 290, margin: 1 , display :"flex"  ,flexDirection: 'column',}}>
+    <Card sx={{ maxWidth: 290, minWidth: 290, margin: 1 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -48,16 +49,13 @@ export default function Ticket({ owner, dateCreated, imgpath, note, action }) {
           image={imgpath}
           alt={imgpath}
         />}
-      <CardContent sx ={{flexGrow :"100"}}>
+      <CardContent >
         {action == "new" ?
           <TextField
-            // id="outlined-multiline-static"
-            disabled
             label="یادداشت"
             multiline
             rows={10}
-            value={note}
-          // defaultValue="Default Value"
+            sx ={{ width : "100%"}}
           />
           :
           <Typography variant="body2" color="text.secondary">
@@ -66,32 +64,26 @@ export default function Ticket({ owner, dateCreated, imgpath, note, action }) {
       </CardContent>
 
       <CardActions >
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton  sx={{ background: "#fbfafa" }}>
+          <NearMeOutlined />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <IconButton  sx={{ background: "#fbfafa" }}>
+          <AttachFile />
         </IconButton>
-
+        <IconButton  sx={{ background: "#fbfafa" }}>
+          <SaveAs />
+        </IconButton>
+        <IconButton  sx={{ background: "#fbfafa" }}>
+          <PendingActions />
+        </IconButton>
+        <IconButton  sx={{ background: "#fbfafa" }}>
+          <AddCommentOutlined />
+        </IconButton>
+        <IconButton  sx={{ background: "#fbfafa" }}>
+          <DownloadDone />
+        </IconButton>
+  
       </CardActions>
-
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            aaaa
-          </Typography>
-
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
-        </CardContent>
-      </Collapse>
-
     </Card>
 
   );
