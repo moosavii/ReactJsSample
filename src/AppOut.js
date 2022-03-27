@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Pages/Login';
-import About from './Pages/About';
 import ForgetPass from './Pages/ForgetPass';
+import NotFound from './Pages/NotFound';
+import Companies from './Pages/Companies';
 
 
 
@@ -14,11 +15,15 @@ function AppOut() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/ForgetPass" element={<ForgetPass />} />
+          {/* نام کمپانی قبل از لاگین مهم است 
+          بعد از لاگین در توکن است
+          */}
+          <Route exact path="/" element={<Companies />} />
+          <Route path="/companies" element={<Companies />} />
+          <Route path="/:company/ForgetPass" element={<ForgetPass />} />
+          <Route path="/:company/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </BrowserRouter>
     </>

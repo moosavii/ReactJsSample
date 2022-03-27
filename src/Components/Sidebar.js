@@ -20,10 +20,12 @@ import AddBoxOutlined from '@mui/icons-material/AddBoxOutlined';
 import StickyNote2Outlined from '@mui/icons-material/StickyNote2Outlined';
 import Drafts from '@mui/icons-material/Drafts';
 import Telegram from '@mui/icons-material/Telegram';
-import { AccessibilityNew, NearMeOutlined, Person } from '@mui/icons-material';
-import SimpleDialog from './SimpleDialog';
+import { AccessibilityNew, NearMeOutlined, PeopleAltTwoTone, Person, PersonAddAlt, PersonAddAlt1, PersonAddAlt1Outlined, PersonPinCircleTwoTone } from '@mui/icons-material';
 import { Dialog, DialogTitle } from '@mui/material';
 import Ticket from './Ticket';
+import { useNavigate } from 'react-router-dom';
+import User from './User';
+
 
 
 const drawerWidth = 240;
@@ -62,102 +64,115 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function SideBar({ sideBarOpen }) {
 
-  const[showDialog , setShowDialog] = React.useState("");
+  const [showDialog, setShowDialog] = React.useState("");
+  const navigate = useNavigate();
 
 
-  const closeDialog = () =>
-  { 
+  const closeDialog = () => {
     setShowDialog("");
   }
   const mainListItems = (
     <>
-  
-      <ListItem button key={"new"} onClick = {() => setShowDialog("newTicket")}>
+
+      <ListItem button key={"new"} onClick={() => setShowDialog("newTicket")}>
         <ListItemIcon >
           <AddBoxOutlined />
         </ListItemIcon>
-        <ListItemText primary={"جدید"} />
+        <ListItemText primary={"یادداشت جدید"} />
       </ListItem>
-  
-      <ListItem button key={"private"}>
+
+      <ListItem button key={"private"} >
         <ListItemIcon>
           <StickyNote2Outlined />
         </ListItemIcon>
         <ListItemText primary={"شخصی"} />
       </ListItem>
-  
-      <ListItem button key={"inbox"}>
+
+      <ListItem button key={"inbox"} onClick={() => navigate("/Tickets")}>
         <ListItemIcon>
           <Drafts />
         </ListItemIcon>
         <ListItemText primary={"دریافتی"} />
       </ListItem>
-  
+
       <ListItem button key={"sent"}>
         <ListItemIcon>
           <NearMeOutlined />
         </ListItemIcon>
         <ListItemText primary={"ارسالی"} />
       </ListItem>
-  
+
       <ListItem>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
         <ListItemText primary="گزارشات" />
       </ListItem>
-  
-  
-  
+
+
+
       <Divider sx={{ my: 1 }} />
-  
-  
-  
-      <ListItem button key={"users"}>
+
+      <ListItem button key={"newUser"} onClick={() => setShowDialog("newUser")}>
+        <ListItemIcon>
+          <PersonAddAlt1 />
+        </ListItemIcon>
+        <ListItemText primary={"کاربر جدید"} />
+      </ListItem>
+
+      <ListItem button key={"users"} onClick={() => navigate("/users")}>
         <ListItemIcon>
           <Person />
         </ListItemIcon>
         <ListItemText primary={"کاربران"} />
       </ListItem>
-  
+
+      <ListItem button key={"newGroup"}>
+        <ListItemIcon>
+          <PeopleAltTwoTone />
+        </ListItemIcon>
+        <ListItemText primary={"گروه جدید"} />
+      </ListItem>
+
       <ListItem button key={"groups"}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary={"گروه ها"} />
       </ListItem>
-  
+
+
       <ListItem button key={"access"}>
         <ListItemIcon>
           <AccessibilityNew />
         </ListItemIcon>
         <ListItemText primary={"دسترسی ها"} />
       </ListItem>
-  
+
       <Divider sx={{ my: 1 }} />
-  
-  
+
+
       <ListItem button key={"users2"}>
         <ListItemIcon>
           <Person />
         </ListItemIcon>
         <ListItemText primary={"کاربران"} />
       </ListItem>
-  
+
       <ListItem button key={"groups2"}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary={"گروه ها"} />
       </ListItem>
-  
+
       <ListItem button key={"access2"}>
         <ListItemIcon>
           <AccessibilityNew />
         </ListItemIcon>
         <ListItemText primary={"zدسترسی ها"} />
       </ListItem>
-  
+
       <Divider sx={{ my: 1 }} />
     </>
   )
@@ -170,10 +185,14 @@ export default function SideBar({ sideBarOpen }) {
           {mainListItems}
         </List>
       </Drawer>
-      
+
       {/* ========dialog opne on state change======== */}
       <Dialog onClose={closeDialog} open={showDialog == "newTicket"}>
-        <Ticket action = "new"/>
+        <Ticket closeDialog={closeDialog} action="new" />
+      </Dialog>
+
+      <Dialog onClose={closeDialog} open={showDialog == "newUser"}>
+        <User closeDialog={closeDialog} action="new" />
       </Dialog>
     </>
   );

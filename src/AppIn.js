@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useContext , useState} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -11,19 +11,23 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import ContextA from './Util/Context';
-import Home from './Pages/Home'
-import MoreVert from '@mui/icons-material/MoreVert';
-import SimpleDialog from './Components/SimpleDialog';
 import Header from './Components/Header';
 import SideBar from './Components/SideBar';
+import Tickets from './Pages/Tickets';
+import Users from './Pages/Users';
+
+import Login from './Pages/Login';
+import NotFound from './Pages/NotFound';
+
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 
 
 export default function AppIn() {
 
-  const driver = React.useContext(ContextA);
-  const [sideBarOpen, setSideBarOpen] = React.useState(true);
+  const driver = useContext(ContextA);
+  const [sideBarOpen, setSideBarOpen] = useState(true);
 
   const handleLogout = () => {
     driver.setIsAuthAndLocalStorege(false);
@@ -34,27 +38,37 @@ export default function AppIn() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <Header sideBarOpen={sideBarOpen} toggleDrawer={toggleDrawer} handleLogout={handleLogout} />
-      <SideBar sideBarOpen={sideBarOpen} />
+    <BrowserRouter>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <Header sideBarOpen={sideBarOpen} toggleDrawer={toggleDrawer} handleLogout={handleLogout} />
+        <SideBar sideBarOpen={sideBarOpen} />
 
-      <Box
-        component="main"
-        sx={{
-          // height: '100vh',
-          overflow: 'auto',
-          marginTop : "65px",
-          height: 'calc(100vh - 65px)',
-          width: '100%',
+        <Box
+          component="main"
+          sx={{
+            // height: '100vh',
+            overflow: 'auto',
+            marginTop: "65px",
+            height: 'calc(100vh - 65px)',
+            width: '100%',
 
-        }}
-      >
-        {/* <Container  sx={{maxWidth : "100% !important" , marginTop : "50px" }}> */}
-          <Home />
-        {/* </Container> */}
-      </Box>
-    </Box>
+          }}
+        >
+          <Routes>
+            {/* نام کمپانی قبل از لاگین مهم است 
+          بعد از لاگین در توکن است
+          */}
+            <Route exact path="/" element={<Tickets />} />
+            <Route path="/tickets" element={<Tickets />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes >
+
+        </Box>
+      </Box >
+    </BrowserRouter >
 
 
 

@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ContextA from '../Util/Context';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -19,6 +19,7 @@ function Login() {
 
   const driver = useContext(ContextA)
   const navigate = useNavigate();
+  let pathParams = useParams();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,23 +27,24 @@ function Login() {
     console.log({
       email: data.get('username'),
       password: data.get('password'),
+      pathparam : pathParams.company
     });
 
-    if (data.get('username') == 'ali' && data.get('password') == '123')
-    {
+    if (data.get('username') == 'ali' && data.get('password') == '123') {
       driver.setIsAuthAndLocalStorege(true)
-      navigate("/home")
+      navigate("/Tickets")
     }
   };
 
   useEffect(() => {
     console.log("login component is loaded")
     driver.setIsAuthAndLocalStorege(false);
-  },[]);
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+
       <Box
         sx={{
           marginTop: 8,
@@ -56,6 +58,9 @@ function Login() {
         </Avatar>
         <Typography component="h1" variant="h5">
           ردیف
+        </Typography>
+        <Typography component="h1" variant="h5">
+          {pathParams.company}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField

@@ -1,13 +1,26 @@
+import {useContext , useState} from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import MuiAppBar from '@mui/material/AppBar';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import ContextA from '../Util/Context';
+
 import { MoreVert, ExitToApp, PersonOutline } from '@mui/icons-material';
 
 
-export default function Header({ sideBarOpen, toggleDrawer, handleLogout }) {
+function Header({ sideBarOpen, toggleDrawer }) {
+  const navigate = useNavigate();
+    
+    const driver = useContext(ContextA);
+    const handleLogout = () => { 
+        driver.setIsAuthAndLocalStorege(false)
+        navigate("/companies")
+    
+    }
 
     return (
 
@@ -48,4 +61,6 @@ export default function Header({ sideBarOpen, toggleDrawer, handleLogout }) {
         </ AppBar>
     );
 }
+
+export default Header;
 

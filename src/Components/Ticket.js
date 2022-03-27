@@ -13,13 +13,12 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import SimpleDialogDemo from './SimpleDialog'
 import { Box, TextField } from '@mui/material';
 import { AddComment, AddCommentOutlined, AttachEmail, AttachFile, DownloadDone, NearMeOutlined, PendingActions, RocketLaunchOutlined, Save, SaveAlt, SaveAltOutlined, SaveAs, SendOutlined, Telegram } from '@mui/icons-material';
 
 
 
-export default function Ticket({ owner, dateCreated, imgpath, note, action }) {
+export default function Ticket({ owner, dateCreated, imgpath, note, action , closeDialog }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -64,7 +63,7 @@ export default function Ticket({ owner, dateCreated, imgpath, note, action }) {
       </CardContent>
 
       <CardActions >
-        <IconButton  sx={{ background: "#fbfafa" }}>
+        <IconButton  sx={{ background: "#fbfafa" }} onClick={closeDialog}>
           <NearMeOutlined />
         </IconButton>
         <IconButton  sx={{ background: "#fbfafa" }}>
