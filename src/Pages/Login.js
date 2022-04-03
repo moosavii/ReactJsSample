@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ContextA from '../Util/Context';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -22,24 +23,47 @@ function Login() {
   let pathParams = useParams();
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('username'),
-      password: data.get('password'),
-      pathparam : pathParams.company
-    });
-
-    if (data.get('username') == 'ali' && data.get('password') == '123') {
-      driver.setIsAuthAndLocalStorege(true)
-      navigate("/Tickets")
+    let loginData = {
+      company: pathParams.company,
+      username: data.get('username'),
+      password: data.get('password')
     }
+    console.log(loginData);
+
+    axios.post('https://localhost:44382/api/login', loginData)
+      .then(function (response) {
+        console.log({ response: response })
+        
+        driver.setIsAuth(true)
+        console.log({ isAuth: driver.isAuth })
+        
+        sessionStorage.setItem("token", response.data.accessToken);
+        console.log(sessionStorage)
+
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(
+        function () {
+          navigate("/")
+        }
+      )
+    console.log("log after axios")
+
+
   };
 
   useEffect(() => {
-    console.log("login component is loaded")
-    driver.setIsAuthAndLocalStorege(false);
+    console.log("login use effect")
+    driver.setIsAuth(false);
   }, []);
+
+
 
   return (
     <Container component="main" maxWidth="xs">

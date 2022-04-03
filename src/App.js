@@ -8,31 +8,31 @@ import ContextA from './Util/Context';
 import cacheRtl from './Util/CustomCache';
 import AppIn from './AppIn';
 import AppOut from './AppOut';
+import { BrowserRouter } from 'react-router-dom';
 
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+  console.log({ appisath: isAuth })
+
   //const [sideBarOpen, setSideBarOpen] = useState(false);
 
 
   /// init
-    console.log("init")
-    let LocalIsAuth = localStorage.getItem("isAuth");
-    if (LocalIsAuth == "true" && isAuth == false)
-      setIsAuth(true);
-    else if (LocalIsAuth == "false" && isAuth == true)
-      setIsAuth(false);
+  // let LocalIsAuth = localStorage.getItem("isAuth");
+  // if (LocalIsAuth == "true" && isAuth == false)
+  //   setIsAuth(true);
+  // else if (LocalIsAuth == "false" && isAuth == true)
+  //   setIsAuth(false);
   ///
 
-  const setIsAuthAndLocalStorege = (value) => {
-    setIsAuth(value);
-    localStorage.setItem("isAuth", value);
-  }
+ 
 
   const driver = {
     isAuth,
-    setIsAuthAndLocalStorege,
+    setIsAuth
   }
+
 
   return (
     <Box dir="rtl" >
@@ -40,9 +40,11 @@ function App() {
       <CacheProvider value={cacheRtl}>
         <ThemeProvider theme={CustomTheme}>
           <ContextA.Provider value={driver}>
-            <Box>
-              {isAuth ? <AppIn /> : <AppOut />}
-            </Box>
+            <BrowserRouter>{/* در کل پروژه باید یکلی باشد*/}
+              <Box>
+                {isAuth ? <AppIn /> : <AppOut />}
+              </Box>
+            </BrowserRouter>
           </ContextA.Provider>
         </ThemeProvider>
       </CacheProvider>

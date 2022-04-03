@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 function Users() {
 
-  const [ticket, setTicket] = useState([{}])
+  const [user, setUser] = useState([{}])
 
 
   useEffect(() => {
@@ -33,8 +33,7 @@ function Users() {
       { owner: "علوی", dateCreated: "1399/01/01", imagePath: "", note: "این عکسش کجا رفته" },
 
     ]
-    setTicket(fromApi)
-    console.log(ticket)
+    setUser(fromApi)
 
   }, [])
 

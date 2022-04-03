@@ -13,7 +13,6 @@ function AppOut() {
 
   return (
     <>
-      <BrowserRouter>
         <Routes>
           {/* نام کمپانی قبل از لاگین مهم است 
           بعد از لاگین در توکن است
@@ -25,7 +24,6 @@ function AppOut() {
           <Route path="*" element={<NotFound />} />
 
         </Routes>
-      </BrowserRouter>
     </>
   );
 }

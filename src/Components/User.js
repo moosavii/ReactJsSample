@@ -27,10 +27,7 @@ function User(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('username'),
-      password: data.get('password'),
-    });
+
     
     props.closeDialog();
 
@@ -39,7 +36,6 @@ function User(props) {
 
   useEffect(() => {
 
-    console.log(props.closeDialog)
   }, []);
 
   return (

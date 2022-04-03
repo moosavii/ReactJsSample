@@ -39,9 +39,6 @@
 //     useEffect(() => {
 //         calcPosition()
 //         resizeObserver.observe(ref.current)
-//         console.log("containerStyle")
-        
-//         console.log(containerStyle)
 
 //     }, [])
 

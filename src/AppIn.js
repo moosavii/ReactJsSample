@@ -18,7 +18,7 @@ import Tickets from './Pages/Tickets';
 import Users from './Pages/Users';
 
 import Login from './Pages/Login';
-import NotFound from './Pages/NotFound';
+import NotFound2 from './Pages/NotFound2';
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ export default function AppIn() {
   const [sideBarOpen, setSideBarOpen] = useState(true);
 
   const handleLogout = () => {
-    driver.setIsAuthAndLocalStorege(false);
+    driver.setIsAth(false);
   };
 
   const toggleDrawer = () => {
@@ -38,7 +38,6 @@ export default function AppIn() {
   };
 
   return (
-    <BrowserRouter>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Header sideBarOpen={sideBarOpen} toggleDrawer={toggleDrawer} handleLogout={handleLogout} />
@@ -63,12 +62,11 @@ export default function AppIn() {
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/login" element={<Login />} />
             <Route path="/users" element={<Users />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFound2 />} />
           </Routes >
 
         </Box>
       </Box >
-    </BrowserRouter >
 
 
 
