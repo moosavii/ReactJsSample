@@ -1,12 +1,12 @@
-function NotFound2() {
+function Error() {
 
     return (
         <center>
             <h1>
-                not found2
+                Error
             </h1 >
         </center>
     )
 }
 
-export default NotFound2;
+export default Error;

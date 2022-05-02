@@ -18,7 +18,9 @@ import Tickets from './Pages/Tickets';
 import Users from './Pages/Users';
 
 import Login from './Pages/Login';
-import NotFound2 from './Pages/NotFound2';
+import NotFound from './Pages/NotFound';
+import Error from './Pages/Error';
+
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -59,10 +61,12 @@ export default function AppIn() {
           بعد از لاگین در توکن است
           */}
             <Route exact path="/" element={<Tickets />} />
-            <Route path="/tickets" element={<Tickets />} />
+            <Route path="/tickets/:id" element={<Tickets/>} />
+            <Route path="/tickets/" element={<Tickets/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/users" element={<Users />} />
-            <Route path="*" element={<NotFound2 />} />
+            <Route path="/error" element={<Error />} />
+            <Route path="*" element={<NotFound />} />
           </Routes >
 
         </Box>

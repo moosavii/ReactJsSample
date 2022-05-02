@@ -74,7 +74,7 @@ export default function SideBar({ sideBarOpen }) {
   const mainListItems = (
     <>
 
-      <ListItem button key={"new"} onClick={() => setShowDialog("newTicket")}>
+      <ListItem button key={"new"} onClick={() => navigate("/tickets/new")}>
         <ListItemIcon >
           <AddBoxOutlined />
         </ListItemIcon>
@@ -88,7 +88,7 @@ export default function SideBar({ sideBarOpen }) {
         <ListItemText primary={"شخصی"} />
       </ListItem>
 
-      <ListItem button key={"inbox"} onClick={() => navigate("/Tickets")}>
+      <ListItem button key={"inbox"} onClick={() => navigate("/tickets")}>
         <ListItemIcon>
           <Drafts />
         </ListItemIcon>

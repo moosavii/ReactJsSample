@@ -4,6 +4,7 @@ import Login from './Pages/Login';
 import ForgetPass from './Pages/ForgetPass';
 import NotFound from './Pages/NotFound';
 import Companies from './Pages/Companies';
+import Error from './Pages/Error';
 
 
 
@@ -21,6 +22,7 @@ function AppOut() {
           <Route path="/companies" element={<Companies />} />
           <Route path="/:company/ForgetPass" element={<ForgetPass />} />
           <Route path="/:company/login" element={<Login />} />
+          <Route path="/error" element={<Error />} />
           <Route path="*" element={<NotFound />} />
 
         </Routes>

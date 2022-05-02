@@ -17,9 +17,10 @@ function Header({ sideBarOpen, toggleDrawer }) {
     
     const driver = useContext(ContextA);
     const handleLogout = () => { 
-        driver.setIsAuth(false)
-        sessionStorage.cleare()
-        navigate("/companies")
+        driver.setAccessToken("")
+        driver.setFullName("")
+        sessionStorage.clear()
+        navigate("/")
     
     }
 

@@ -22,6 +22,7 @@ function Login() {
   const navigate = useNavigate();
   let pathParams = useParams();
 
+
   const handleSubmit = (event) => {
 
     event.preventDefault();
@@ -36,17 +37,25 @@ function Login() {
     axios.post('https://localhost:44382/api/login', loginData)
       .then(function (response) {
         console.log({ response: response })
+        driver.setAccessToken(response.data.accessToken)
+        console.log({ accessToken: driver.accessToken })
         
-        driver.setIsAuth(true)
-        console.log({ isAuth: driver.isAuth })
+        driver.setFullName(response.data.fullName)
+        console.log({ fullName: driver.fullName })
         
-        sessionStorage.setItem("token", response.data.accessToken);
+
+        sessionStorage.setItem("accessToken", response.data.accessToken);
+        sessionStorage.setItem("fullName", response.data.fullname);
+
         console.log(sessionStorage)
+
+        
 
 
       })
       .catch(function (error) {
         console.log(error);
+        navigate("/error")
       })
       .then(
         function () {
@@ -60,8 +69,11 @@ function Login() {
 
   useEffect(() => {
     console.log("login use effect")
-    driver.setIsAuth(false);
-  }, []);
+    driver.setAccessToken("")
+    driver.setFullName("")
+    sessionStorage.clear()
+    
+  }, []);//olny one time
 
 
 

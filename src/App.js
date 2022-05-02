@@ -12,37 +12,56 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-  console.log({ appisath: isAuth })
+  //const [isAuth, setIsAuth] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+  const [fullName, setFullName] = useState("");
 
-  //const [sideBarOpen, setSideBarOpen] = useState(false);
+
+  console.log({ accessToken: accessToken })
+  console.log({ fullName: fullName })
+
+
 
 
   /// init
-  // let LocalIsAuth = localStorage.getItem("isAuth");
-  // if (LocalIsAuth == "true" && isAuth == false)
-  //   setIsAuth(true);
-  // else if (LocalIsAuth == "false" && isAuth == true)
-  //   setIsAuth(false);
-  ///
 
- 
+  // if (ssAccessToken && !accessToken) {
+  //   console.log("update from session storage")
+  //   setAccessToken(ssAccessToken );
+  //   setFullName(ssFullName)
+  // }
+
+  useEffect(() => {
+    const ssAccessToken = sessionStorage.getItem("accessToken");
+    const ssFullName = sessionStorage.getItem("fullName");
+    /*
+        فقط در این حالت باید بروزرسانی می شود 
+    مقادیر فالسی و مقادیر ترویی در نظر گرفته می شوند
+    */
+    if (ssAccessToken && !accessToken) {
+      console.log("update from session storage")
+      setAccessToken(ssAccessToken);
+      setFullName(ssFullName)
+    }
+  }, [])
+
 
   const driver = {
-    isAuth,
-    setIsAuth
+    accessToken,
+    setAccessToken,
+    fullName,
+    setFullName
   }
 
 
   return (
     <Box dir="rtl" >
-
       <CacheProvider value={cacheRtl}>
         <ThemeProvider theme={CustomTheme}>
           <ContextA.Provider value={driver}>
             <BrowserRouter>{/* در کل پروژه باید یکلی باشد*/}
               <Box>
-                {isAuth ? <AppIn /> : <AppOut />}
+                {accessToken ? <AppIn /> : <AppOut />}
               </Box>
             </BrowserRouter>
           </ContextA.Provider>
