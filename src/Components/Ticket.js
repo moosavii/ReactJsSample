@@ -13,7 +13,7 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Box, Input, Paper, TextField } from '@mui/material';
+import { Box, Dialog, Input, Paper, TextField } from '@mui/material';
 import { AddComment, AddCommentOutlined, AttachEmail, AttachFile, DownloadDone, Fingerprint, Image, NearMeOutlined, PendingActions, RocketLaunchOutlined, Save, SaveAlt, SaveAltOutlined, SaveAs, SendOutlined, Telegram } from '@mui/icons-material';
 import axios from "axios";
 import { getHeader, getUrl } from '../Util/Constants';
@@ -26,11 +26,21 @@ import MailIcon from '@mui/icons-material/Mail';
 
 export default function Ticket(props) {
   const [note1, setNote1] = React.useState("")
+  const [dialog, setDialog] = React.useState("")
+
   const driver = React.useContext(ContextA);
   const navigate = useNavigate();
+  const inputFile = React.useRef(null)
+
   const handleNoteChange = (e) => {
     setNote1(e.target.value)
   }
+
+  const onButtonClick = () => {
+    // `current` points to the mounted file input element
+    if (props.action == "new")
+      inputFile.current.click();
+  };
 
   //console.log("props.data.timecreated")
 
@@ -57,6 +67,7 @@ export default function Ticket(props) {
   }
 
   return (
+    <>
     <Card sx={{ maxWidth: 290, minWidth: 290, margin: 1 }}>
       {props.action == "new" ?
         <>
@@ -64,7 +75,7 @@ export default function Ticket(props) {
             label="یادداشت"
             multiline
             rows={10}
-            sx={{ width: "97%" , margin : "5px"}}
+            sx={{ width: "97%", margin: "5px" }}
             value={note1}
             onChange={handleNoteChange}
           />
@@ -74,12 +85,12 @@ export default function Ticket(props) {
 
           <CardHeader
             avatar={
-           
-              <Paper elevation={1} sx={{ bgcolor: "#f0f7ff",color : "#3097ff",opacity:0.5 }}>
-              {props.data.id} 
+
+              <Paper elevation={1} sx={{ bgcolor: "#f0f7ff", color: "#3097ff", opacity: 0.5 }}>
+                {props.data.id}
               </Paper>
             }
-         
+
             title={props.data.firstname + " " + props.data.lastname}
             subheader={props.data.datecreated + "  " + props.data.timecreated.hours.toString().padStart(2, "0") + ":" + props.data.timecreated.minutes.toString().padStart(2, "0")}
             action={
@@ -96,27 +107,41 @@ export default function Ticket(props) {
         </>
       }
       <CardActions >
-        <IconButton sx={{ background: "#fbfafa" }} onClick={props.closeDialog}>
+        <IconButton sx={{ background: "#fbfafa" }} onClick={()=> setDialog("selectPerson")}>
           <NearMeOutlined />
         </IconButton>
-        <IconButton sx={{ background: "#fbfafa" }}>
+
+        <IconButton sx={{ background: "#fbfafa" }} onClick={onButtonClick}>
           <AttachFile />
         </IconButton>
-        <IconButton sx={{ background: "#fbfafa" }} onClick={save}>
-          <SaveAs />
-        </IconButton>
-        <IconButton sx={{ background: "#fbfafa" }}>
-          <PendingActions />
-        </IconButton>
-        <IconButton sx={{ background: "#fbfafa" }}>
-          <AddCommentOutlined />
-        </IconButton>
-        <IconButton sx={{ background: "#fbfafa" }}>
-          <DownloadDone />
-        </IconButton>
+        <input type='file' id='file' ref={inputFile} hidden />
+        {props.action == "new" ?
+          <IconButton sx={{ background: "#fbfafa" }} onClick={save}>
+            <SaveAs />
+          </IconButton>
+          :
+          <>
+            <IconButton sx={{ background: "#fbfafa" }}>
+              <PendingActions />
+            </IconButton>
+            <IconButton sx={{ background: "#fbfafa" }}>
+              <AddCommentOutlined />
+            </IconButton>
+            <IconButton sx={{ background: "#fbfafa" }}>
+              <DownloadDone />
+            </IconButton>
+          </>
+        }
 
       </CardActions>
     </Card>
+    <Dialog onClose={()=> setDialog("")} open={dialog =="selectPerson"}>
+      <Paper>
+      selectPerson
+      </Paper>
+
+    </Dialog>
+    </>
 
   );
 }
